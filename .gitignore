@@ -1,0 +1,21 @@
+# Ignore Dependencies
+node_modules/
+packages/
+
+# Ignore Testing
+coverage/
+
+# Ignore Production
+build/
+
+# Ignore Miscellaneous
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+package.json
+yarn.lock
+
+# Ignore Logs
+*.log

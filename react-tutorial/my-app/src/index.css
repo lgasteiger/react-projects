@@ -1,0 +1,57 @@
+/****************************************************************************
+ * Description: index.css - This CSS file will support the presentation layer
+ *              for the index.js file.
+ * Date: 2019-01-18
+ * Author: React Tutorial
+ ****************************************************************************/
+
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+} /* end body; Specificity value=> 1 */
+
+ol, ul {
+  padding-left: 30px;
+} /* end ol, ul; Specificity value=> 1 */
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+} /* end .board-row:after; Specificity value=> 10 + 10 = 20 */
+
+.status {
+  margin-bottom: 10px;
+} /* end .status; Specificity value=> 10 */
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+} /* end .square; Specificity value=> 10 */
+
+.square:focus {
+  outline: none;
+} /* end .square:focus; Specificity value=> 10 + 10 = 20 */
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+} /* end .kbd-navigation .square:focus; Specificity value=> 10 + 10 = 20*/
+
+.game {
+  display: flex;
+  flex-direction: row;
+} /* end .game; Specificity value=> 10 */
+
+.game-info {
+  margin-left: 20px;
+} /* end .game-info; Specificity value=> 10 */
