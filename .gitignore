@@ -16,6 +16,7 @@ build/
 .env.production.local
 package.json
 yarn.lock
+archive/
 
 # Ignore Logs
 *.log
