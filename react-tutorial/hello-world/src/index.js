@@ -50,12 +50,17 @@ function tick1() {
 } //end tick1
 */
 
-function getGreeting(person) {
-  if (person) {
-    return <h1>Hello {formatName(person)}!</h1>
-  } else {
-    return <h1>Hello stranger.</h1>
+function GetGreeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return (
+      <UserGreeting username={user.firstName} />
+    ); //end return
   } //end if
+  
+  return (
+    <GuestGreeting newest="newest successful player" />
+  ); //end return
 } //end getGreeting
 
 function formatName(person) {
@@ -85,7 +90,7 @@ const elementFirstName = (
 
 const elementNameUrl = (
   <div className="userInfo">
-    {getGreeting(user)}
+    {formatName(user)}
     <p className="avatarUrl">
       Avatar URL: {user.avatarUrl}
     </p>
@@ -108,7 +113,7 @@ function App() {
       <Clock />
       <Clock />
       <Clock />
-      <Toggle />
+      <Toggle text="Here is the current state=>"/>
     </div>
   ); //end return
 } //end App
@@ -218,14 +223,42 @@ class Toggle extends React.Component {
     })); //end this.setState
   } //end handleClick
 
+  decideOptions() {
+    if (this.state.isToggleOn) {
+      return ("the switch is turned ON.");
+    }
+    return ("the switch is definitely turned OFF.");
+  } //end decideOptions
+
   render() {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button>
+      <div>
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+        <div>
+          {this.props.text} {this.decideOptions()}
+        </div>
+      </div>
     ); //end return
   }// end render 
 } //end Toggle
+
+function UserGreeting(props) {
+  return (
+    <h1>
+      Welcome back {props.username}!!
+    </h1>
+  ); //end return
+} //end UserGreeting
+
+function GuestGreeting(props) {
+  return (
+    <h1>
+      Please sign up, when you get a chance, {props.newest}!
+    </h1>
+  );
+} //end GuestGreeting
 
 // ==============================
 ReactDOM.render(
@@ -236,6 +269,6 @@ ReactDOM.render(
   />,
   */
 
-  <App />,
+  <GetGreeting isLoggedIn={true}/>,
   document.getElementById('root')
 ); //end ReactDOM.render
