@@ -11,8 +11,9 @@ import './index.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
+    <button className="square" 
+            onClick={props.onClick}>
+            {props.value}
     </button>
   ); //end return
 } //end Square

@@ -5,5 +5,15 @@
  * Author: Leo Gasteiger
  ****************************************************************/
 
-@import url("basic-css-leo.css");
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+@import url('basic-css-leo.css');
+@import url('https://fonts.googleapis.com/css?family=Quattrocento|Roboto+Mono');
+
+h1 {
+  font-family: 'Quattrocento', serif;
+  text-shadow: 3px -4px 1px #eee;
+  
+} /* end h1; Specificity value=> 1 */
+
+div p {
+  font-size: 0.5em;
+} /* end div p; Specificity value=> 1 + 1 = 2 */
