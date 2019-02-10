@@ -8,12 +8,21 @@
 @import url('basic-css-leo.css');
 @import url('https://fonts.googleapis.com/css?family=Quattrocento|Roboto+Mono');
 
-h1 {
+#heading {
+
+} /* end #heading; Specificity value=> 100 */
+
+#heading h1 {
   font-family: 'Quattrocento', serif;
   text-shadow: 3px -4px 1px #eee;
   
-} /* end h1; Specificity value=> 1 */
+} /* end #heading h1; Specificity value=> 100 + 1 = 101 */
 
-div p {
+#heading p {
   font-size: 0.5em;
-} /* end div p; Specificity value=> 1 + 1 = 2 */
+  font-family: 'Roboto Mono', monospace;
+} /* end #heading p; Specificity value=> 100 + 1 = 101 */
+
+footer {
+  padding: 3em 0 0 0;
+}

@@ -1,7 +1,7 @@
 /*************************************************************
  * Description: index.js - This JS file will be the main entry 
  *              point for the React app.
- * Date: 2019-02-03
+ * Date: 2019-02-09
  * Author: Leo Gasteiger
  *************************************************************/
 
@@ -50,18 +50,9 @@ function tick1() {
 } //end tick1
 */
 
-function GetGreeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
-    return (
-      <UserGreeting username={user.firstName} />
-    ); //end return
-  } //end if
-  
-  return (
-    <GuestGreeting newest="newest successful player" />
-  ); //end return
-} //end getGreeting
+/****************************
+ * Introducing JSX Examples *
+ ****************************/
 
 function formatName(person) {
   return person.firstName + ' ' + person.lastName;
@@ -107,17 +98,6 @@ const elementWelcome = (
   <Welcome name="Sara" />
 );
 
-function App() {
-  return (
-    <div>
-      <Clock />
-      <Clock />
-      <Clock />
-      <Toggle text="Here is the current state=>"/>
-    </div>
-  ); //end return
-} //end App
-
 const favoriteAuthor = {
   firstName: 'Sean',
   lastName: 'Carroll',
@@ -133,6 +113,10 @@ function formatCurrentDate(currentDate) {
     currentDate.toLocaleTimeString()
   ); //end return
 } //end formatCurrentDate
+
+/*********************************
+ * Components and Props Examples *
+ *********************************/
 
 function Avatar(props) {
   return (
@@ -167,6 +151,10 @@ function Comment(props) {
     </div>
   ); //end return
 } //end Comment
+
+/********************************
+ * State and Lifecycle Examples * 
+ ********************************/
 
 function tick2() {
   return (
@@ -208,6 +196,60 @@ class Clock extends React.Component {
   } //end render
 } //end Clock
 
+function App() {
+  return (
+    <div>
+      <Clock />
+      <Clock />
+      <Clock />
+      <Toggle text="Here is the current state=>"/>
+    </div>
+  ); //end return
+} //end App
+
+/****************************
+ * Handling Events Examples *
+ ****************************/
+
+class ActionLink extends React.Component {
+  formatCurrentDateTime() {
+    return (
+      (new Date()).toLocaleString()
+    ); //end return
+  } //end formatCurrentDateTime
+
+  handleClick = (
+    (e) => {
+      e.preventDefault();
+      console.log('**********The link was clicked**********');
+    } //end ()
+  ); //end handleClick
+
+  render() {
+    return (
+      <div>
+        <section id="heading">
+          <h1>Action Link Example</h1>
+          <p>
+            This Webpage will display an example of a synthetic event
+            with a callback function (class method).
+          </p>
+        </section>
+        <section id="content">
+          <a href="#" onClick={this.handleClick}>
+            Action Link Example
+          </a>
+        </section>
+        <footer>
+          <p>
+            Last Updated: {this.formatCurrentDateTime()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end ActionLink
+
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
@@ -244,6 +286,74 @@ class Toggle extends React.Component {
   }// end render 
 } //end Toggle
 
+class LoggingButtonPublicClass extends React.Component {
+  handleClick = (
+    () => {
+      console.log('this is:', this);
+    } //end ()
+  ); //end handleClick
+
+  render() {
+    return (
+      <div className="BindingPublicClass">
+        <h1>Logging Button Public Class Example</h1>
+        <p>
+          This Webpage will show an example of binding the handleClick
+          callback function (class method) to the class using public
+          class fields.
+        </p>
+        <p>
+        <button onClick={
+          this.handleClick
+        }>
+          Binding with Public Class Fields
+        </button>
+        </p>
+      </div>
+    ); //end return
+  } //end render
+} //end LoggingButtonPublicClass
+
+class LoggingButtonArrowFunction extends React.Component {
+  handleClick = (
+    () => { 
+      console.log('this is:', this);
+    } //end ()
+  ); //end handleClick
+  
+  render() {
+    return (
+      <div className="BindingArrowFunction">
+        <h1>Logging Button Arrow Function Example</h1>
+        <p>This Webpage will show an example of binding the handleClick
+           clallback function (class method) to the class using an arrow
+           function.
+        </p>
+        <button onClick={
+          (e) => this.handleClick(e)
+        }>
+          Binding with Arrow Functions
+        </button>
+      </div>
+    ); //end return
+  } //end render
+} //end LoggingButtonArrowFunction
+
+class MethodsBindingExamples extends React.Component {
+  render() {
+    return (
+      <div>
+        <LoggingButtonPublicClass />
+        <LoggingButtonArrowFunction />
+      </div>
+    ); //end return
+  } //end render
+} //end MethodsBindingExamples
+
+/**********************************
+ * Conditional Rendering Examples *
+ **********************************/
+
 function UserGreeting(props) {
   return (
     <h1>
@@ -260,6 +370,25 @@ function GuestGreeting(props) {
   );
 } //end GuestGreeting
 
+function GetGreeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return (
+      <UserGreeting username={user.firstName} />
+    ); //end return
+  } //end if
+  
+  return (
+    <GuestGreeting newest="newest successful player" />
+  ); //end return
+} //end getGreeting
+
+/*
+ * Element Variables Example
+ */
+
+
+
 // ==============================
 ReactDOM.render(
   /*
@@ -269,6 +398,6 @@ ReactDOM.render(
   />,
   */
 
-  <GetGreeting isLoggedIn={true}/>,
+  <ActionLink />,
   document.getElementById('root')
 ); //end ReactDOM.render
