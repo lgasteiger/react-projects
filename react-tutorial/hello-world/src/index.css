@@ -9,20 +9,23 @@
 @import url('https://fonts.googleapis.com/css?family=Quattrocento|Roboto+Mono');
 
 #heading {
-
+  /* background-size: 2em; */
+  background: #c72 url('./images/Google-AI-gives-birth.jpg') round no-repeat;
+  color: #eee;
 } /* end #heading; Specificity value=> 100 */
 
 #heading h1 {
-  font-family: 'Quattrocento', serif;
-  text-shadow: 3px -4px 1px #eee;
+  /* font-family: 'Quattrocento', serif; */
+  text-shadow: 3px -4px 1px #000;
   
 } /* end #heading h1; Specificity value=> 100 + 1 = 101 */
 
 #heading p {
   font-size: 0.5em;
   font-family: 'Roboto Mono', monospace;
+  text-shadow: 3px -4px 1px #000;
 } /* end #heading p; Specificity value=> 100 + 1 = 101 */
 
 footer {
   padding: 3em 0 0 0;
-}
+} /* end footer; Specificity value=> 1 */

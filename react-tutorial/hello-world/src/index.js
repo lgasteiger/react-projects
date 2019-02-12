@@ -356,17 +356,57 @@ class MethodsBindingExamples extends React.Component {
 
 function UserGreeting(props) {
   return (
-    <h1>
-      Welcome back {props.username}!!
-    </h1>
+    <div>
+      <section id="heading">
+        <h1>Conditional Rendering Examples</h1>
+        <p>
+          This Webpage will show examples of conditional rendering.
+        </p>
+      </section>
+      <section id="content">
+        <h1>
+          Welcome back {props.username}!!
+        </h1>
+      </section>
+      <footer>
+        <figure>
+          <figcaption>
+            <a href="https://reactjs.org">React JS Info</a>
+          </figcaption>
+        </figure>
+        <p>
+          Last Updated: {(new Date()).toLocaleString()}
+        </p>
+      </footer>
+    </div>
   ); //end return
 } //end UserGreeting
 
 function GuestGreeting(props) {
   return (
-    <h1>
-      Please sign up, when you get a chance, {props.newest}!
-    </h1>
+    <div>
+      <section id="heading">
+        <h1>Conditional Rendering Examples</h1>
+        <p>
+          This Webpage will show examples of conditional rendering.
+        </p>
+      </section>
+      <section id="content">
+        <h1>
+          Please sign up, when you get a chance, {props.newest}!
+        </h1>
+      </section>
+      <footer>
+        <figure>
+          <figcaption>
+            <a href="https://reactjs.org">React JS Info</a>
+          </figcaption>
+        </figure>
+        <p>
+          Last Updated: {(new Date()).toLocaleString()}
+        </p>
+      </footer>
+    </div>
   );
 } //end GuestGreeting
 
@@ -379,14 +419,67 @@ function GetGreeting(props) {
   } //end if
   
   return (
-    <GuestGreeting newest="newest successful player" />
+    <GuestGreeting newest="newest player" />
   ); //end return
 } //end getGreeting
 
 /*
  * Element Variables Example
  */
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  ); //end return
+} //end LoginButton
 
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  ); //end LogoutButton
+} //end LogoutButton
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  } //end constructor
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  } //end handleLoginClick
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  } //handleLogoutClick
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />
+    } //end if
+
+    return (
+      <div>
+        <GetGreeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    ); //end return
+  } //end render
+} //end LoginControl
+
+/**
+ * Inline If with Logical && Operator
+ */
 
 
 // ==============================
@@ -398,6 +491,6 @@ ReactDOM.render(
   />,
   */
 
-  <ActionLink />,
+  <LoginControl />,
   document.getElementById('root')
 ); //end ReactDOM.render
