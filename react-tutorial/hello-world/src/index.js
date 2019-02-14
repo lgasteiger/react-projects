@@ -461,17 +461,26 @@ class LoginControl extends React.Component {
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     let button;
-
+    
+    /*
     if (isLoggedIn) {
       button = <LogoutButton onClick={this.handleLogoutClick} />
     } else {
       button = <LoginButton onClick={this.handleLoginClick} />
     } //end if
+    */
+
+    //Inline If-Else with Conditional Operator example 
+    isLoggedIn ? (button = <LogoutButton onClick={this.handleLogoutClick} />) :
+                 (button = <LoginButton onClick={this.handleLoginClick} />);
 
     return (
       <div>
         <GetGreeting isLoggedIn={isLoggedIn} />
         {button}
+        <div>
+          The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+        </div>
       </div>
     ); //end return
   } //end render
@@ -480,7 +489,112 @@ class LoginControl extends React.Component {
 /**
  * Inline If with Logical && Operator
  */
+function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <section id="heading">
+        <h1>Inline If with Logical && Operator</h1>
+        <p>
+          This Webpage will show an example of using the inline if
+          statement with the logical && operator 
+        </p>
+      </section>
+      <section id="content">
+        <h1>Hello!</h1>
+        {unreadMessages.length > 0 &&
+          <h2>
+            You have {unreadMessages} unread messages.
+          </h2>
+        }
+      </section>
+      <footer>
+        <p>
+          Last Update: {(new Date()).toLocaleString()}
+        </p>
+      </footer>
+    </div>
+  ); //end return
+} //end Mailbox
 
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  } //end if
+  
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  ); //end return
+} //end WarningBanner
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {showWarning: true};
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  } //end constructor
+
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    })); //end this.setState
+  } //end handleToggleClick
+
+  render() {
+    return (
+      <div>
+        <section id="heading">
+          <h1>Preventing Components from Rendering</h1>
+          <p>This Webpage will show an example of preventing 
+            components from rendering.
+          </p>
+        </section>
+        <section id="content">
+          <h2>
+            <WarningBanner warn={this.state.showWarning} />
+          </h2>
+          <button onClick={this.handleToggleClick}>
+            {this.state.showWarning ? 'Hide' : 'Show'}
+          </button>
+        </section>
+        <footer>
+          <p>
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end Page
+
+/**************************
+ * List and Keys Examples *
+ **************************/
+
+function CreateListNums() {
+  const numbers = [1, 2, 3, 4, 5];
+  const listItems = numbers.map((number) => <li>{number}</li>);
+
+  return (
+    <div>
+      <section id="heading">
+        <h1>Rendering Multiple Components Example</h1>
+        <p>This Webpage will show examples of rendering mulitple
+           components.</p>
+      </section>
+      <section id="content">
+        <ul>{listItems}</ul>
+      </section>
+      <footer>
+        <p>
+          Last Updated: {(new Date()).toLocaleString()}
+        </p>
+      </footer>
+    </div>
+  ); //end return
+} //end createListNums
 
 // ==============================
 ReactDOM.render(
@@ -491,6 +605,6 @@ ReactDOM.render(
   />,
   */
 
-  <LoginControl />,
+  <CreateListNums />,
   document.getElementById('root')
 ); //end ReactDOM.render
