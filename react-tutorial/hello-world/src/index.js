@@ -607,6 +607,46 @@ function NumberList(props) {
   ); //end return
 } //end NumberList
 
+function Blog(props) {
+  const sidebar = (
+    <ul>
+      {props.posts.map(
+        (post) => <li key={post.id}>
+                    {post.title} ({post.id})
+                  </li>
+      )}
+    </ul>
+  ); //end sidebar
+
+  const content = props.posts.map(
+    (post) => <div key={post.id}>
+                <h3>({post.id}) {post.title}</h3>
+                <p>{post.content}</p>
+              </div>
+  ); //end content
+
+  return (
+    <div>
+      <section id="heading">
+        <h1>Keys Must Only Be Unique Amoung Siblings Example</h1>
+        <p>This Webage will display an example of unique keys amoung
+           siblings.
+        </p>
+      </section>
+      <section id="content">
+        {sidebar}
+        <hr />
+        {content}
+      </section>
+      <footer>
+        <p>
+          Last Updated: {(new Date()).toLocaleString()}
+        </p>
+      </footer>
+    </div>
+  ); //end return
+} //end Blog
+
 // ==============================
 ReactDOM.render(
   /*
@@ -616,6 +656,8 @@ ReactDOM.render(
   />,
   */
 
-  <NumberList numbers={[1, 2, 3, 4, 5]} />,
+  <Blog posts={[{id: 1, title: 'Hello World', content: 'Welcom to learning React'}
+               ,{id: 2, title: 'Installation', content: 'You can install React from npm'}]
+              } />,
   document.getElementById('root')
 ); //end ReactDOM.render
