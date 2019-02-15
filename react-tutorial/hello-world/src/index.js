@@ -573,9 +573,20 @@ class Page extends React.Component {
  * List and Keys Examples *
  **************************/
 
-function CreateListNums() {
-  const numbers = [1, 2, 3, 4, 5];
-  const listItems = numbers.map((number) => <li>{number}</li>);
+function ListItem(props) {
+  const value = props.value;
+  return (
+    <li>{value}</li>
+  ); //end return
+} //end ListItem
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map(
+    (number) => <ListItem value={number}
+                          key={number.toString()}
+                />
+  ); //end listItems
 
   return (
     <div>
@@ -594,7 +605,7 @@ function CreateListNums() {
       </footer>
     </div>
   ); //end return
-} //end createListNums
+} //end NumberList
 
 // ==============================
 ReactDOM.render(
@@ -605,6 +616,6 @@ ReactDOM.render(
   />,
   */
 
-  <CreateListNums />,
+  <NumberList numbers={[1, 2, 3, 4, 5]} />,
   document.getElementById('root')
 ); //end ReactDOM.render
