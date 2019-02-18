@@ -840,7 +840,7 @@ class FlavorForm extends React.Component {
         <section id="content">
           <form onSubmit={this.handleSubmit}>
             <fieldset>
-              <legend>Favorite Flavors</legend>
+              <legend>Favorite Flavor</legend>
               <p>
                 <label htmlFor="favFlavors">
                   Please pick your favorite flavor:
@@ -885,6 +885,90 @@ class FlavorForm extends React.Component {
   } //end render
 } //end FlavorForm
 
+/**
+ * TODO: Figure out how to store arrays in the value attribute
+ *       to printout selected options.
+ */
+class MultipleFlavorsForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: []
+    }; //end this.state
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    }); //end this.setState
+  } //end handleChange
+
+  handleSubmit(event) {
+    //alert('The favorite flavor(s) were: ' + this.state.value);
+    console.log('The favorite flavor(s) were: ' + this.state.value);
+    event.preventDefault();
+  } //end handleSubmit
+
+  render() {
+    return(
+       <div>
+         <section id="heading">
+           <h1>Select Tag with Muliple Options Selected</h1>
+           <p>
+             This Webpage will show the use of the <code>select</code> tag 
+             with multiple options selected.
+           </p>
+         </section>
+         <section id="content">
+           <form onSubmit={this.handleSubmit}>
+             <fieldset>
+               <legend>Favorite Flavor(s)</legend>
+               <p className="multipleFlavors">
+                 <label htmlFor="multipleFlavors">
+                   Please pick you favorite flavor(s):
+                 </label>
+                 <select id="mulitpleFlavors"
+                         className="multipleFlavors"
+                         onChange={this.handleChange}
+                         multiple={true}
+                         value={this.state.value}>
+                   <option value="grapefruit">
+                     Grapefruit
+                   </option>
+                   <option value="lime">
+                     Lime
+                   </option>
+                   <option value="coconut">
+                     Coconut
+                   </option>
+                   <option value="mango">
+                     Mango
+                   </option>
+                 </select>
+               </p>
+               <p>
+                 <input type="submit" value="Submit" />
+               </p>
+             </fieldset>
+           </form>
+         </section>
+         <footer>
+           <p className="reactInfo">
+             <a href="https://reactjs.org">
+               React Info
+             </a>
+           </p>
+           <p className="lastUpdated">
+             Last Updated: {(new Date()).toLocaleString()}
+           </p>
+         </footer>
+       </div>
+    ); //end return
+  } //end render
+} //end MultipleFlavorsForm
+
 // ==============================
 ReactDOM.render(
   /*
@@ -900,6 +984,6 @@ ReactDOM.render(
               } />,
   */
 
-  <FlavorForm />,
+  <MultipleFlavorsForm />,
   document.getElementById('root')
 ); //end ReactDOM.render
