@@ -26,6 +26,39 @@
   text-shadow: 3px -4px 1px #000;
 } /* end #heading p; Specificity value=> 100 + 1 = 101 */
 
+label {
+  text-align: right;
+  padding-right: 0.5em;
+} /* end label; Specificity value=> 1 */
+
+input:focus {
+  background: yellow;
+} /* end input:focus; Specificity value=> 10 + 1 = 11 */
+
+input[type=text]:invalid {
+  background: red;
+} /* end input[type=text]:invalid; Specificity value=> 10 + 10 + 1 = 21 */
+
+textarea:invalid {
+  background: red;
+} /* end textarea:invalid: Specificity value=> 10 + 1 = 11 */
+
+textarea:focus {
+  background: yellow;
+} /* end textarea:focus; Specificity value=> 10 + 1 = 11 */
+
 footer {
   padding: 3em 0 0 0;
 } /* end footer; Specificity value=> 1 */
+
+footer a {
+  color: #f66;
+  text-decoration: none;
+  border-bottom: 3px solid #ddd;
+} /* end footer a; Specificity value=> 1 + 1 = 2 */
+
+footer a:hover {
+  color: #c00;
+  background: #fcc;
+  border-color: #c00;
+} /* end footer a:hover; Specificity value=> 10 + 2 = 12 */

@@ -20,6 +20,6 @@ footer {
   clear: both;
 } /* end footer; Specificity value=> 1 */
 
-footer p {
+footer .lastUpdated {
   transform: scale(0.75);
 } /* end footer p; Specificity value=> 1 + 1 = 2 */

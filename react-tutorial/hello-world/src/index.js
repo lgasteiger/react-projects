@@ -620,7 +620,7 @@ function Blog(props) {
 
   const content = props.posts.map(
     (post) => <div key={post.id}>
-                <h3>({post.id}) {post.title}</h3>
+                <h3>({post.id}) x{post.title}</h3>
                 <p>{post.content}</p>
               </div>
   ); //end content
@@ -647,6 +647,213 @@ function Blog(props) {
   ); //end return
 } //end Blog
 
+/*********
+ * Forms *
+ *********/
+
+/**
+ * Controlled Components
+ */
+
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    }; //end this.state
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value.toUpperCase()
+    }); //end this.setState
+  } //end handleChange
+
+  handleSubmit(event) {
+    //alert('A name was submitted: ' + this.state.value);
+    console.log('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+    this.setState({
+      value: ''
+    }); //end this.setState
+  } //end handleSubmit
+
+  render() {
+    return(
+      <div>
+        <section id="heading">
+          <h1>Forms</h1>
+          <p>
+            This Webpage will display examples of forms implementation 
+            logic.
+          </p>
+        </section>
+        <section id="content">
+          <h2>Controlled Components Example</h2>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>User Info</legend>
+              <p>
+                <label htmlFor="fullName">Name:</label>
+                <input type="text" 
+                       id="fullName" 
+                       className="fullName"
+                       value={this.state.value}
+                       onChange={this.handleChange}
+                       autoFocus={true}
+                />
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div> 
+    ); //end return
+  } //end render
+} //end NameForm
+
+/**
+ * Textarea Tag Example
+ */
+
+class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'Please write an essay about your favorite DOM element.'
+    }; //end this.state
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+  } //end handleChange
+
+  handleSubmit(event) {
+    //alert('An essay was submitted: ' + this.state.value);
+    console.log('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
+    //TODO: this.setState({
+    //        value: '';
+    //}); //end this.setState
+  } //end handleSubmit
+
+  render(){
+    return(
+      <div>
+        <section id="heading">
+          <h1>Textarea Tag Example</h1>
+          <p>
+            This Webpage will show an example of the <code>textarea</code> tag.
+          </p>
+        </section>
+        <section id="content">
+          <h2>Textarea Tag</h2>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>Essay Info</legend>
+              <p>
+                <label htmlFor="essayInfo">
+                  Essay:
+                </label>
+                <textarea className="essayInfo"
+                       value={this.state.value}
+                       onChange={this.handleChange}
+                       autoFocus={true}
+                       cols="50"
+                       rows="10"
+                />
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    );  //end return
+  } //end render
+} //end EssayForm
+
+/**
+ * The Select Tag
+ */
+
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'coconut'
+    }; //end this.state
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    }); //end this.setState
+  } //end handleChange
+
+  handleSubmit(event) {
+    //alert('The selected flavor was "' + this.state.value + '"');
+    console.log('The selected flavor was ' + this.state.value + '"');
+  } //end handleChange
+
+  render() {
+    return(
+      <div>
+        <section id="heading">
+          <h1>Select Tag Example</h1>
+          <p>
+            This Webpage will show an example of the <code>select</code> tag. 
+          </p> 
+        </section>
+        <section id="content">
+          
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React Info
+            </a>
+          </p>
+          <p>
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end FlavorForm
+
 // ==============================
 ReactDOM.render(
   /*
@@ -656,8 +863,12 @@ ReactDOM.render(
   />,
   */
 
+  /*
   <Blog posts={[{id: 1, title: 'Hello World', content: 'Welcom to learning React'}
                ,{id: 2, title: 'Installation', content: 'You can install React from npm'}]
               } />,
+  */
+
+  <EssayForm />,
   document.getElementById('root')
 ); //end ReactDOM.render
