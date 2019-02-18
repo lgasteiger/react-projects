@@ -823,8 +823,9 @@ class FlavorForm extends React.Component {
   } //end handleChange
 
   handleSubmit(event) {
-    //alert('The selected flavor was "' + this.state.value + '"');
-    console.log('The selected flavor was ' + this.state.value + '"');
+    //alert('The selected flavor was "' + this.state.value + '".');
+    console.log('The selected flavor was "' + this.state.value + '".');
+    event.preventDefault();
   } //end handleChange
 
   render() {
@@ -837,7 +838,37 @@ class FlavorForm extends React.Component {
           </p> 
         </section>
         <section id="content">
-          
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>Favorite Flavors</legend>
+              <p>
+                <label htmlFor="favFlavors">
+                  Please pick your favorite flavor:
+                </label>
+                <select id="favFlavors"
+                        className="favFlavors"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        autoFocus={true}>
+                  <option value="grapefruit">
+                    Grapefruit
+                  </option>
+                  <option value="lime">
+                    Lime
+                  </option>
+                  <option value="coconut">
+                    Coconut
+                  </option>
+                  <option value="mango">
+                    Mango
+                  </option>
+                </select>
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
         </section>
         <footer>
           <p className="reactInfo">
@@ -869,6 +900,6 @@ ReactDOM.render(
               } />,
   */
 
-  <EssayForm />,
+  <FlavorForm />,
   document.getElementById('root')
 ); //end ReactDOM.render
