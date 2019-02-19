@@ -1193,9 +1193,9 @@ class FileInput extends React.Component {
  ********************/
 
 function BoilingVerdict(props) {
-  if (!props.verdict) {
-    return null;
-  } //end if
+  //if (!props.verdict) {
+  //  return null;
+  //} //end if
   //console.log('Celcius=>' + props.celcius);
   //console.log('Verdict=>' + props.verdict);
 
@@ -1251,7 +1251,6 @@ class Calculator extends React.Component {
                    type="number"
                    value={temperature}
                    onChange={this.handleChange}
-                   autoFocus={true}
             />
             <BoilingVerdict celcius={parseFloat(temperature)}
                             verdict={showVerdict}
@@ -1273,6 +1272,129 @@ class Calculator extends React.Component {
   } //end render
 } //end Calculator
 
+/**
+ * Adding a second input
+ */
+
+function toCelcius(fahrenheit) {
+  return (
+    (fahrenheit - 32) * 5 / 9
+  ); //end return
+} //end toCelcius
+
+function toFahrenheit(celcius) {
+  return (
+    (celcius * 9 / 5) + 32
+  ); //end return
+} //end toFahrenheit
+
+const scaleNames = {
+  c: 'Celcius'
+  ,f: 'Fahrenheit'
+}; //end scaleNames
+
+class TemperatureInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.props.onChange(event.target.value)
+  } //end handleChange
+
+  render() {
+    const temperature = this.props.temperature;
+    const scale = this.props.scale;
+
+    return (
+      <div>
+        <form>
+          <fieldset>
+            <legend>
+              Please enter temperature in {scaleNames[scale]}:   
+            </legend>
+            <p className="tempInput">
+              <input type="number" 
+                     value={temperature}
+                     onChange={this.handleChange}
+              />
+            </p>
+          </fieldset>
+        </form>
+      </div>
+    ); //end return
+  } //end render
+} //end TemperatureInput
+
+class CalculatorTwoInputs extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      temperature: 0
+      ,scale: 'c'
+    }; //end this.state
+
+    this.handleCelciusChange = this.handleCelciusChange.bind(this);
+    this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+  } //end constructor
+
+  handleCelciusChange(temperature) {
+    this.setState({
+      scale: 'c'
+      ,temperature: temperature
+    }); //end this.setState
+  } //end handleCelciusChange
+
+  handleFahrenheitChange(temperature) {
+    this.setState({
+      scale: 'f'
+      ,temperature: temperature
+    }); //end this.setState
+  } //end handleFahrenheitChange
+
+  render() {
+    const temperature = this.state.temperature;
+    const scale = this.state.scale;
+    const celcius = scale === 'f' ? toCelcius(temperature) : temperature;
+    const fahrenheit = scale === 'c' ? toFahrenheit(temperature) : temperature;
+    //const showVerdict = this.state.showVerdict;
+
+    return (
+      <div>
+        <section id="heading">
+          <h1>Adding a Second Input Example</h1>
+          <p>
+            This Webpage will render an example involving lifting
+            up state using two inputs.
+          </p>
+        </section>
+        <section className="content">
+          <TemperatureInput scale='c'
+                            temperature={celcius}
+                            onChange={this.handleCelciusChange}
+          />
+          <TemperatureInput scale='f' 
+                            temperature={fahrenheit}
+                            onChange={this.handleFahrenheitChange}
+          />
+          <BoilingVerdict celcius={parseFloat(celcius)} />
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end CalculatorTwoInputs
+
 // ==============================
 ReactDOM.render(
   /*
@@ -1288,6 +1410,6 @@ ReactDOM.render(
               } />,
   */
 
-  <Calculator />,
-  document.getElementById('root')
+  <CalculatorTwoInputs />
+  ,document.getElementById('root')
 ); //end ReactDOM.render
