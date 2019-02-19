@@ -7,6 +7,7 @@
 
 @import url('basic-css-leo.css');
 @import url('https://fonts.googleapis.com/css?family=Quattrocento|Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Rubik|VT323');
 
 #heading {
   /* background-size: 2em; */
@@ -46,6 +47,18 @@ textarea:invalid {
 textarea:focus {
   background: yellow;
 } /* end textarea:focus; Specificity value=> 10 + 1 = 11 */
+
+.noBoil {
+  font-family: 'Rubik', sans-serif;
+} /* end .yesBoil; Specificity value=> 10 */
+
+.yesBoil {
+  font-family: 'VT323', monospace;
+  color: red;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.5em;
+} /* noBoil; Specificity value=> 10 */
 
 footer {
   padding: 3em 0 0 0;

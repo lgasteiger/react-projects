@@ -681,7 +681,7 @@ class NameForm extends React.Component {
   } //end handleSubmit
 
   render() {
-    return(
+    return (
       <div>
         <section id="heading">
           <h1>Forms</h1>
@@ -755,8 +755,8 @@ class EssayForm extends React.Component {
     //}); //end this.setState
   } //end handleSubmit
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <section id="heading">
           <h1>Textarea Tag Example</h1>
@@ -829,7 +829,7 @@ class FlavorForm extends React.Component {
   } //end handleChange
 
   render() {
-    return(
+    return (
       <div>
         <section id="heading">
           <h1>Select Tag Example</h1>
@@ -912,7 +912,7 @@ class MultipleFlavorsForm extends React.Component {
   } //end handleSubmit
 
   render() {
-    return(
+    return (
        <div>
          <section id="heading">
            <h1>Select Tag with Muliple Options Selected</h1>
@@ -969,6 +969,310 @@ class MultipleFlavorsForm extends React.Component {
   } //end render
 } //end MultipleFlavorsForm
 
+/**
+ * File input tag examples
+ */
+
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2,
+      reservationNum: ''
+    }; //end this.state
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.className;
+
+    this.setState({
+      [name]: value
+    }); //end setState
+  } //end handleInputChange
+
+  handleSubmit(event) {
+    console.log('The current state: ' + this.state.isGoing + ', ' + this.state.numberOfGuests + ', ' + this.state.reservationNum + '.');
+    event.preventDefault();
+  } //end handleSubmit
+
+  render() {
+    return (
+      <div>
+        <section id="heading">
+          <h1>Handling Multiple Inputs Example</h1>
+          <p>
+            This Webpage will display examples of handling multiple
+            inputs from the keyboard.
+          </p>
+        </section>
+        <section id="content">
+          <h2>Handling Multiple Events</h2>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>Reservation Info</legend>
+              <p>
+                <label htmlFor="isGoing">
+                  Is Going:
+                </label>
+                <input type="checkbox"
+                       className="isGoing"
+                       checked={this.state.isGoing}
+                       onChange={this.handleInputChange}
+                />
+              </p>
+              <p>
+                <label htmlFor="numberOfGuests">
+                  Number of Guests:
+                </label>
+                <input type="number"
+                       className="numberOfGuests"
+                       value={this.state.numberOfGuests}
+                       onChange={this.handleInputChange}
+                />
+              </p>
+              <p>
+                <label htmlFor="reservationNum">
+                  Reservation Number:
+                </label>
+                <input type="text"
+                       className="reservationNum"
+                       value={this.state.reservationNum}
+                       onChange={this.handleInputChange}
+                />
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end Reservation
+
+/***************************
+ * Uncontrolled Components *
+ ***************************/
+
+class NameFormUncontrolled extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.input = React.createRef();
+  } //end constructor
+
+  handleSubmit(event) {
+    console.log('A name submitted=> ' + this.input.current.value);
+    event.preventDefault();
+  } //end handleSubmit
+
+  render() {
+    return (
+      <div>
+        <section id="heading">
+          <h1>Uncontrolled Components</h1>
+          <p>
+            This Webpage will render examples of uncontrolled components.
+          </p>
+        </section>
+        <section className="content">
+          <h2>Uncontrolled Components Example</h2>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>Name Input</legend>
+              <p>
+              <label htmlFor="nameInput">
+                Name:
+              </label>
+              <input type="text"
+                     className="nameInput"
+                     ref={this.input}
+                     autoFocus={true}
+                     defaultValue="Bob"
+              />
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end render
+  } //end render
+} //end NameFormUncontrolled
+
+class FileInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fileInput = React.createRef();
+    this.handleSubmit = this.handleSubmit = this.handleSubmit.bind(this);
+  } //end constructor
+
+  handleSubmit(event) {
+    for (let i = 0; i < this.fileInput.current.files.length; i++) {
+      let filename = this.fileInput.current.files[i].name;
+      console.log('Filename ' + ++i + ': ' + filename);
+    } //end for
+    event.preventDefault();
+  } //end handleSubmit
+
+  render() {
+    return (
+      <div>
+        <section id="heading">
+          <h1>File Input Example</h1>
+          <p>
+            This Webpage will render an uncontrolled component
+            file input example.
+          </p>
+        </section>
+        <section className="content">
+          <h2>File Input</h2>
+          <form onSubmit={this.handleSubmit}>
+            <fieldset>
+              <legend>File Input Files</legend>
+              <p>
+                <label htmlFor="uploadFile">
+                  Upload file:
+                </label>
+                <input type="file" 
+                       className="uploadFile"
+                       ref={this.fileInput}
+                />
+              </p>
+              <p>
+                <input type="submit" value="Submit" />
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end FileInput
+
+/********************
+ * Lifting State Up *
+ ********************/
+
+function BoilingVerdict(props) {
+  if (!props.verdict) {
+    return null;
+  } //end if
+  //console.log('Celcius=>' + props.celcius);
+  //console.log('Verdict=>' + props.verdict);
+
+  if (props.celcius >= 100) {
+    return (
+      <p className="yesBoil">
+        The water would boil.
+      </p>  
+    ); //end return
+  } //end if
+  
+  return (
+    <p className="noBoil">
+      The water would not boil.
+    </p>
+  ); //end return
+} //end BoilingVerdict
+
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      temperature: '',
+      showVerdict: false
+    }; //end this.state
+
+    this.handleChange = this.handleChange.bind(this);
+  } //end constructor
+
+  handleChange(event) {
+    this.setState({
+      temperature: event.target.value,
+      showVerdict: event.target.value === '' ? false : true
+    }); //end this.setState
+  } //end handleChange
+
+  render() {
+    const temperature = this.state.temperature;
+    const showVerdict = this.state.showVerdict;
+    return (
+      <div>
+        <section id="heading">
+          <h1>Lifting State Up Examples</h1>
+          <p>
+            This Webpage will render examples of lifting state up.
+          </p>
+        </section>
+        <section className="content">
+          <h2>Temperature Calculator</h2>
+          <fieldset>
+            <legend>Enter temperature in Celcius:</legend>
+            <input className="celciusTemp"
+                   type="number"
+                   value={temperature}
+                   onChange={this.handleChange}
+                   autoFocus={true}
+            />
+            <BoilingVerdict celcius={parseFloat(temperature)}
+                            verdict={showVerdict}
+            />
+          </fieldset>
+        </section>
+        <footer>
+          <p className="reactInfo">
+            <a href="https://reactjs.org">
+              React JS Info
+            </a>
+          </p>
+          <p className="lastUpdated">
+            Last Updated: {(new Date()).toLocaleString()}
+          </p>
+        </footer>
+      </div>
+    ); //end return
+  } //end render
+} //end Calculator
+
 // ==============================
 ReactDOM.render(
   /*
@@ -984,6 +1288,6 @@ ReactDOM.render(
               } />,
   */
 
-  <MultipleFlavorsForm />,
+  <Calculator />,
   document.getElementById('root')
 ); //end ReactDOM.render
