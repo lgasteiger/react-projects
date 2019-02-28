@@ -1395,6 +1395,175 @@ class CalculatorTwoInputs extends React.Component {
   } //end render
 } //end CalculatorTwoInputs
 
+/******************************
+ * Composition vs Inheritance *
+ * 
+ * TODO: I'm not able to get any of the Composition examples
+ *       to work!!!
+ ******************************/
+
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  ); //end return
+} //end FancyBorder
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        Welcome
+      </h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecraft!
+      </p>
+    </FancyBorder>
+  ); //end return
+} //end WelcomeDialog
+
+function Contacts() {
+  return (
+    <div className="Contacts">
+      Here is the Contacts section.
+    </div>
+  ); //end return
+} //end Contacts
+
+function Chat() {
+  return (
+    <div className="Chat">
+      Here is the Chat section.
+    </div>
+  ); //end return
+} //end Chat
+
+function SplitPane(props) {
+  return (
+    <div className="SplitPane">
+      <div className="SplitPane-left">
+        {props.left}
+      </div>
+      <div className="SplitPane-right">
+        {props.right}
+      </div>
+    </div>
+  ); //end return
+} //end SplitPane
+
+function SplitPaneApp() {
+  return (
+    <SplitPane 
+      left={
+        <Contacts />
+      } //end left
+      right={
+        <Chat />
+      } //end right
+    > 
+    </SplitPane>
+  ); //end return
+} //end SplitPaneApp
+
+/**
+ * Specialization Examples
+ */
+
+function Dialog(props) {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        {props.title}
+      </h1>
+      <p className="Dialog-message">
+        {props.message}
+      </p>
+      {props.children}
+    </FancyBorder>
+  ); //end return
+} //end Dialog
+
+function WelcomeDialog2() {
+  return (
+    <Dialog title="Welcome"
+            message="Thank you for visiting our spacecraft!" 
+    />
+  ); //end WelcomeDialog2
+} //end WelcomeDialog2
+
+function UserVerdict(props) {
+  console.log('showUser=>' + props.showUser);
+  console.log('login=>' + props.login);
+
+  if (!props.showUser) {
+    return null;
+  } //end if
+  
+  return (
+    <p className="SignupDialog-user">
+      Welcome aboard, {props.login}
+    </p>  
+  ); //end return
+} //end UserVerdict
+
+class SignUpDialog extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: ''
+      ,showUser: false
+    } //end this.state
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+  } //end constructor
+
+  handleChange(e) {
+    this.setState({
+      login: e.target.value
+      //,showUser: e.target.value === '' ? false : true
+    }); //end this.setState
+  } //end handleChange
+
+  handleSignUp(e) {
+    //if (this.state.showUser) {
+    //  console.log('Welcome aboard, ' + this.state.login + '!'); 
+    //} //end if
+
+    this.setState({
+      showUser: true
+    }); //end setState
+  } //end handleSignUp
+
+  render() {
+    const login = this.state.login;
+    const showUser = this.state.showUser;
+
+    return (
+      <Dialog title="Mars Exploration Program"
+              message="How should we refer to you?"
+      >
+        <fieldset>
+          <legend>Sign-in/Sign-up Page</legend>
+          <p>
+            <input value={this.state.login}
+                   onChange={this.handleChange}
+                   autoFocus={true}
+            />
+          </p>
+          <button onClick={this.handleSignUp}>
+            Sign Me Up!
+          </button>
+        </fieldset>
+        <UserVerdict login={login}
+                     showUser={showUser}
+        />
+      </Dialog>
+    ); //end return
+  } //end render
+} //end SignUpDialog
+
 // ==============================
 ReactDOM.render(
   /*
@@ -1410,6 +1579,6 @@ ReactDOM.render(
               } />,
   */
 
-  <CalculatorTwoInputs />
+  <SignUpDialog />
   ,document.getElementById('root')
 ); //end ReactDOM.render
