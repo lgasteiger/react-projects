@@ -1579,6 +1579,6 @@ ReactDOM.render(
               } />,
   */
 
-  <SignUpDialog />
+  <FileInput />
   ,document.getElementById('root')
 ); //end ReactDOM.render
